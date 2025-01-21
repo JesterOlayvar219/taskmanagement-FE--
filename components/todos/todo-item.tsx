@@ -1,13 +1,8 @@
 import React, { useState, useRef, useContext } from "react";
 import { TodoContext } from "../../app/context/TodoContext";
+import { Action } from "@/types/Action";
 
 // Define all possible action types
-type Action =
-  | { type: "ADD_TASK"; payload: string }
-  | { type: "DELETE_TASK"; payload: string }
-  | { type: "EDIT_TASK"; payload: { id: string; newName: string } }
-  | { type: "TOGGLE_TASK"; payload: string }
-  | { type: "SET_FILTER"; payload: string };
 
 interface TodoProps {
   id: string;
@@ -16,11 +11,11 @@ interface TodoProps {
   dispatch: (action: Action) => void;
 }
 
-const Todo = ({ 
-  id, 
-  name, 
-  ongoingStatue, 
-  dispatch 
+const Todo = ({
+  id,
+  name,
+  ongoingStatue,
+  dispatch,
 }: TodoProps): React.ReactElement => {
   const showCheckbox = useContext(TodoContext);
   const [isEditing, setEditing] = useState<boolean>(false);
@@ -62,7 +57,7 @@ const Todo = ({
   return (
     <li className="w-full">
       <div className="flex flex-row justify-between items-center w-full bg-white rounded-md p-2 px-2">
-        <div className="relative flex items-center gap-2 flex-grow">
+        <div className="flex items-center gap-2 flex-grow">
           {showCheckbox && (
             <>
               <input
