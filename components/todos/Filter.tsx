@@ -8,7 +8,7 @@ interface FilterProps {
 
 const Filter: React.FC<FilterProps> = ({listHeadingRef, headingText, filterList}) => {
   return(
-    <div className='flex flex-row justify-between items-center  border bg-white p-2 px-2'>
+    <div className='flex flex-row justify-between items-center  border bg-gray-400 p-2 px-2'>
       <div>
           <h2
             id="list-heading"
