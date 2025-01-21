@@ -1,54 +1,8 @@
+import { Action } from "@/types/Action";
+import { State } from "@/types/State";
 import { nanoid } from "nanoid";
-// Reducer function
-interface Task {
-  id: string;
-  name: string;
-  initial: boolean;
-  second: boolean;
-  third: boolean;
-  final: boolean;
-}
-
-interface State {
-  tasks: Task[];
-  filter ?: string;
-}
-
-interface AddTaskAction {
-  type: "ADD_TASK";
-  payload: string;
-}
-
-interface ToggleTaskAction {
-  type: "TOGGLE_TASK";
-  payload: string;
-}
-
-interface DeleteTaskAction {
-  type: "DELETE_TASK";
-  payload: string;
-}
-
-interface EditTaskAction {
-  type: "EDIT_TASK";
-  payload: {
-    id: string;
-    newName: string;
-  }
-}
-
-interface SetFilterAction {
-  type: "SET_FILTER";
-  payload: string;
-}
 
 // Uniion type for Actions
-type Action =  
-  | AddTaskAction
-  | ToggleTaskAction
-  | DeleteTaskAction
-  | EditTaskAction
-  | SetFilterAction;
 
 export default function todoReducer(state: State, action: Action): State {
   switch (action.type) {
@@ -63,6 +17,7 @@ export default function todoReducer(state: State, action: Action): State {
             initial: false,
             second: false,
             third: false,
+            fourth: false,
             final: false,
           },
         ],
@@ -79,6 +34,7 @@ export default function todoReducer(state: State, action: Action): State {
                 initial: true,
                 second: false,
                 third: false,
+                fourth: false,
                 final: false,
               };
             } else if (task.initial && !task.second) {
@@ -88,15 +44,27 @@ export default function todoReducer(state: State, action: Action): State {
                 initial: true,
                 second: true,
                 third: false,
+                fourth: false,
                 final: false,
               };
             } else if (task.second && !task.third) {
-              // Move from Third to Final
+              // Move from Third to Fourth
               return {
                 ...task,
                 initial: true,
                 second: true,
                 third: true,
+                fourth: false,
+                final: false,
+              };
+            } else if (task.third && !task.fourth) {
+              // Move from fourth to Final
+              return {
+                ...task,
+                initial: true,
+                second: true,
+                third: true,
+                fourth: true,
                 final: true,
               };
             }
@@ -122,6 +90,11 @@ export default function todoReducer(state: State, action: Action): State {
       return {
         ...state,
         filter: action.payload,
+      };
+    case "SEARCH_TASK":
+      return {
+        ...state,
+        tasks: state.tasks.filter((task) => task.name === action.payload),
       };
     default:
       return state;
