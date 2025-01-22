@@ -179,67 +179,123 @@ export default function Todos(): React.ReactElement {
   }
 
   return (
-    <div className="min-h-screen bg-medium_gray_100">
-      <div className="flex flex-col items-center gap-10 mb-10 ">
-        <SearchTask dispatch={dispatch} />
-        <div className="flex flex-row items-center space-x-1">
-          <Filter
-            listHeadingRef={listHeadingRef}
-            headingText={headingText}
-            filterList={filterList}
-          />
-          <div>
-            <button
-              data-modal-target="crud-modal"
-              data-modal-toggle="crud-modal"
-              onClick={openModal}
-              className="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-              type="button"
-            >
-              ADD
-            </button>
+    <div className="min-h-screen bg-medium_black_100 flex flex-row">
+      {/* <div className="w-1/6 bg-medium_black_200 px-7 py-8">
+        <div>
+          <h2 className="text-3xl text-white font-bold">Project</h2>
+        </div>
+      </div> */}
+      <div className="w-full flex flex-col">
+        <div className="flex flex-row justify-between items-center "></div>
+        <div className="">
+          <div className="h-24 py-7 px-8 flex flex-row justify-between items-center">
+            <div className="">
+              <h2 className="text-white text-xl font-bold">
+                Welcome back, Dragon
+              </h2>
+            </div>
+            <div className="flex flex-row gap-5 justify-center items-center">
+              <button>
+                <img
+                  src="/assets/todos/search.png"
+                  alt="search"
+                  className=""
+                  suppressHydrationWarning={true}
+                />
+              </button>
+              <button>
+                <img
+                  src="/assets/todos/alarm.png"
+                  alt="search"
+                  className=""
+                  suppressHydrationWarning={true}
+                />
+              </button>
+              <button>
+                <img
+                  src="/assets/todos/calendar.png"
+                  alt="search"
+                  className=""
+                  suppressHydrationWarning={true}
+                />
+              </button>
+              <button>
+                <img
+                  src="/assets/todos/image.png"
+                  alt="avatar"
+                  className="border rounded-full "
+                  suppressHydrationWarning={true}
+                />
+              </button>
+            </div>
+          </div>
+          <div className="flex flex-col p-8">
+            <div className="flex flex-row justify-between items-center border-b-2 border-gray-500">
+              <div className="flex flex-row border-b-2 border-white p-4 gap-4">
+                <img
+                  src="/assets/todos/board.png"
+                  alt="board"
+                  suppressHydrationWarning={true}
+                />
+                <span className="text-sm text-white">Board view</span>
+              </div>
+              <div className="flex flex-row gap-4 justify-between items-center">
+                <button>
+                  <span className="text-white text-sm font-bold">Filter</span>
+                </button>
+                <button>
+                  <span className="text-gray-300 text-sm font-bold">Sort</span>
+                </button>
+                <button>
+                  <img
+                    src="/assets/todos/sort.png"
+                    alt="sort"
+                    suppressHydrationWarning={true}
+                  />
+                </button>
+                <button className="bg-blue-600 rounded-3xl py-3 px-6 tex-sm text-white font-bold">
+                  New template
+                </button>
+              </div>
+            </div>
+            <div className="flex lg:flex-row lg:justify-center flex-col items-start w-full py-5 gap-5">
+              <AllTasks taskList={firstTasks} />
+              <TodoTasks taskList={secondTasks} />
+              <InprogressTasks taskList={thirdTasks} />
+              <ReviewTasks taskList={fourthTasks} />
+              <DoneTasks taskList={finalTasks} />
+            </div>
+            <div className="flex flex-col items-center gap-10 mb-10 ">
+              <SearchTask dispatch={dispatch} />
+              <div className="flex flex-row items-center space-x-1">
+                <Filter
+                  listHeadingRef={listHeadingRef}
+                  headingText={headingText}
+                  filterList={filterList}
+                />
+                <div>
+                  <button
+                    data-modal-target="crud-modal"
+                    data-modal-toggle="crud-modal"
+                    onClick={openModal}
+                    className="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    type="button"
+                  >
+                    ADD
+                  </button>
+                </div>
+              </div>
+            </div>
+            <AddTask
+              modalIsOpen={modalIsOpen}
+              closeModal={closeModal}
+              dispatch={dispatch}
+            />
+
+            <FilterTasks taskList={taskList} />
           </div>
         </div>
       </div>
-
-      <AddTask
-        modalIsOpen={modalIsOpen}
-        closeModal={closeModal}
-        dispatch={dispatch}
-      />
-
-      <div className="flex lg:flex-row lg:justify-center flex-col items-start w-full p-2 px-2 gap-8">
-        <AllTasks taskList={firstTasks} />
-        <TodoTasks taskList={secondTasks} />
-        <InprogressTasks taskList={thirdTasks} />
-        <ReviewTasks taskList={fourthTasks} />
-        <DoneTasks taskList={finalTasks} />
-      </div>
-      <FilterTasks taskList={taskList} />
-      {/* <img
-        src="/assets/todos/bigleafplant.png"
-        alt="bigleafplant"
-        className="bottom-20 left-1/4 z-0 absolute"
-        suppressHydrationWarning={true}
-      />
-      <img
-        src="/assets/todos/lamp.png"
-        alt="lamp"
-        className="bottom-20 right-1/4 z-0 absolute"
-        suppressHydrationWarning={true}
-      />
-      <img
-        src="/assets/todos/table.png"
-        alt="table"
-        className="bottom-20 left-1/3 z-0 absolute"
-        suppressHydrationWarning={true}
-      />
-      <img
-        src="/assets/todos/plant.png"
-        alt="plant"
-        className="bottom-20 right-1/3 z-0 absolute"
-        suppressHydrationWarning={true}
-      /> */}
     </div>
   );
 }
