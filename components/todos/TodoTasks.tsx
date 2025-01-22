@@ -1,7 +1,6 @@
 import { TodoContext } from "@/app/context/TodoContext";
 import Image from "next/image";
 
-
 interface TodoTasksProps {
   taskList: React.ReactNode;
 }
@@ -9,17 +8,24 @@ interface TodoTasksProps {
 const TodoTasks: React.FC<TodoTasksProps> = ({ taskList }) => {
   return (
     <TodoContext.Provider value={true}>
-      <div className="flex flex-col w-60 rounded-md bg-purple-400 border-purple-500 border-t-4 p-2 px-2 ">
-        <div className="mb-5 flex flex-row items-center gap-2">
-          <Image src={"/assets/todos/pen.png"} alt="Todo" width={15} height={15} style={{ width: "auto", height: "auto" }}
-            suppressHydrationWarning={true}/>
-          <h1 className="text-xl text-white">To do</h1>
+      <div className="flex flex-col w-[352px] rounded-md bg-medium_black_200 p-6 px-4 space-y-4">
+        <div className="flex flex-row justify-between items-center">
+          <span className="text-sm text-gray-500 font-bold">To do(4)</span>
+          <button className="flex flex-row justify-center items-center gap-2">
+            <Image
+              src="/assets/todos/plus.png"
+              alt="plusBtn"
+              width={18}
+              height={18}
+            />
+            <span className="text-sm text-white font-bold">Add new task</span>
+          </button>
         </div>
-        <div className="max-h-[calc(48px*8)] overflow-y-auto scrollbar-thin scrollbar-thumb-purple-400 scrollbar-track-purple-600">
+        <div className="max-h-[826px] overflow-y-auto scrollbar-thin scrollbar-thumb-sky-400 scrollbar-track-sky-600 ">
           <ul
             role="list"
             aria-labelledby="list-heading"
-            className="flex flex-col gap-4"
+            className="flex flex-col gap-[14px]"
           >
             {taskList}
           </ul>
@@ -27,6 +33,6 @@ const TodoTasks: React.FC<TodoTasksProps> = ({ taskList }) => {
       </div>
     </TodoContext.Provider>
   );
-}
+};
 
 export default TodoTasks;
