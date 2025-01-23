@@ -1,5 +1,6 @@
 import { Action } from "@/types/Action";
 import React, { useState } from "react";
+import Image from "next/image";
 
 interface SearchTaskProps {
   dispatch: (action: Action) => void;
@@ -22,20 +23,27 @@ const SearchTask: React.FC<SearchTaskProps> = ({ dispatch }) => {
 
   return (
     <>
-      <div className="">
-        <h1 className="text-3xl text-black font-bold">Input Tasks</h1>
-      </div>
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          id="new-todo-input"
-          className="py-2 lg:px-20 px-5 border rounded h-14 placeholder:italic placeholder:text-gray-400 text-2xl focus:outline-none focus:border-red-900 focus:ring-2 focus:ring-red-200 shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1)]"
-          name="name"
-          autoComplete="off"
-          placeholder="Search"
-          value={name}
-          onChange={handleChange}
-        />
+        <div className="flex flex-row justify-center items-center">
+          <input
+            type="text"
+            className="h-7 w-60 rounded-lg border border-gray-300 bg-gray-500 focus:ring-primary-600 focus:border-primary-600 block dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 px-3"
+            placeholder="searching"
+            name="name"
+            autoComplete="off"
+            value={name}
+            onChange={handleChange}
+          />
+          <button type="submit">
+            <Image
+              src={"/assets/todos/search.png"}
+              alt="search"
+              width={25}
+              height={25}
+              suppressHydrationWarning={true}
+            />
+          </button>
+        </div>
       </form>
     </>
   );
