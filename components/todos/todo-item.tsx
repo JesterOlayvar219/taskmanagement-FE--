@@ -57,7 +57,7 @@ const Todo = ({
 
   return (
     <li className="">
-      <div className="flex flex-col w-80 h-44   bg-medium_gray_200 rounded-md p-5 space-y-4">
+      <div className="flex flex-col w-80 bg-medium_gray_200 rounded-md p-5 space-y-4">
         <div className="lex flex-col ">
           <div className="flex flex-row justify-between items-center">
             <div className="flex items-center gap-2 flex-grow">
@@ -135,7 +135,8 @@ const Todo = ({
             Dribble marketing
           </span>
         </div>
-        <div className="flex flex-col">
+        {/* progress bar */}
+        {/* <div className="flex flex-col">
           <div className="flex flex-row justify-between items-center">
             <div className="flex flex-row items-center space-x-[6.67px]">
               <Image
@@ -150,7 +151,7 @@ const Todo = ({
             <span className="text-white text-sm">4/10</span>
           </div>
           <progress className="w-full h-1" value={0.7} />
-        </div>
+        </div> */}
         <div className="flex flex-row justify-between items-center">
           <div className="flex items-center justify-center bg-medium_gray_300 w-28 h-7 rounded-xl">
             <span>24 Aug 2024</span>
