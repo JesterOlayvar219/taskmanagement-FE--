@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import React, { useState, useReducer, useRef, useEffect } from "react";
-import Modal from "react-modal";
+import React, { useReducer, useRef, useEffect } from "react";
 
 import Todo from "@/components/todos/todo-item";
 import FilterButton from "@/components/todos/FilterButton";
@@ -9,15 +8,14 @@ import Filter from "@/components/todos/Filter";
 import SearchTask from "@/components/todos/SearchTask";
 
 import todoReducer from "@/reducers/todoReducer";
-// import TodoTasks from "@/components/todos/TodoTasks";
 import AllTasks from "@/components/todos/AllTasks";
 import InprogressTasks from "@/components/todos/InprogressTasks";
 import ReviewTasks from "@/components/todos/ReviewTasks";
 import DoneTasks from "@/components/todos/DoneTasks";
 import FilterTasks from "@/components/todos/FilterTasks";
 import TodoTasks from "@/components/todos/TodoTasks";
-import AddTask from "@/components/todos/AddTask";
 import { Task } from "@/types/Task";
+// import DropdownBtn from "@/components/todos/dropdown";
 
 // Define interfaces for our types
 
@@ -49,7 +47,7 @@ const FILTER_MAP: Record<string, FilterFunction> = {
 
 const FILTER_NAMES = Object.keys(FILTER_MAP);
 
-Modal.setAppElement("#main");
+// Modal.setAppElement("#main");
 
 const initialState: State = {
   tasks: [],
@@ -63,8 +61,6 @@ export default function Todos(): React.ReactElement {
   const [state, dispatch] = useReducer(todoReducer, initialState);
 
   const { tasks, filter } = state;
-
-  console.log("TASK:", state.tasks);
 
   // Ref for list heading
   const listHeadingRef = useRef<HTMLHeadingElement | null>(null);
@@ -168,15 +164,9 @@ export default function Todos(): React.ReactElement {
   const tasksNoun = taskList.length !== 1 ? "items" : "item";
   const headingText = `${taskList.length} ${tasksNoun} `;
 
-  const [modalIsOpen, setIsOpen] = useState(false);
-
-  function openModal() {
-    setIsOpen(true);
-  }
-
-  function closeModal() {
-    setIsOpen(false);
-  }
+  // const handleSelect = (item: string) => {
+  //   alert(`You selected: ${item}`);
+  // };
 
   return (
     <div className="min-h-screen bg-medium_black_100 flex flex-row">
@@ -195,14 +185,7 @@ export default function Todos(): React.ReactElement {
               </h2>
             </div>
             <div className="flex flex-row gap-5 justify-center items-center">
-              <button>
-                <img
-                  src="/assets/todos/search.png"
-                  alt="search"
-                  className=""
-                  suppressHydrationWarning={true}
-                />
-              </button>
+              <SearchTask dispatch={dispatch} />
               <button>
                 <img
                   src="/assets/todos/alarm.png"
@@ -240,9 +223,23 @@ export default function Todos(): React.ReactElement {
                 <span className="text-sm text-white">Board view</span>
               </div>
               <div className="flex flex-row gap-4 justify-between items-center">
-                <button>
-                  <span className="text-white text-sm font-bold">Filter</span>
-                </button>
+                <Filter
+                  listHeadingRef={listHeadingRef}
+                  headingText={headingText}
+                  filterList={filterList}
+                />
+                {/* <DropdownBtn
+                  label="Filter"
+                  items={[
+                    "All",
+                    "Initial",
+                    "Todo",
+                    "InProgress",
+                    "Review",
+                    "Done",
+                  ]}
+                  onSelect={handleSelect}
+                /> */}
                 <button>
                   <span className="text-gray-300 text-sm font-bold">Sort</span>
                 </button>
@@ -259,38 +256,12 @@ export default function Todos(): React.ReactElement {
               </div>
             </div>
             <div className="flex lg:flex-row lg:justify-center flex-col items-start w-full py-5 gap-5">
-              <AllTasks taskList={firstTasks} />
+              <AllTasks taskList={firstTasks} dispatch={dispatch} />
               <TodoTasks taskList={secondTasks} />
               <InprogressTasks taskList={thirdTasks} />
               <ReviewTasks taskList={fourthTasks} />
               <DoneTasks taskList={finalTasks} />
             </div>
-            <div className="flex flex-col items-center gap-10 mb-10 ">
-              <SearchTask dispatch={dispatch} />
-              <div className="flex flex-row items-center space-x-1">
-                <Filter
-                  listHeadingRef={listHeadingRef}
-                  headingText={headingText}
-                  filterList={filterList}
-                />
-                <div>
-                  <button
-                    data-modal-target="crud-modal"
-                    data-modal-toggle="crud-modal"
-                    onClick={openModal}
-                    className="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                    type="button"
-                  >
-                    ADD
-                  </button>
-                </div>
-              </div>
-            </div>
-            <AddTask
-              modalIsOpen={modalIsOpen}
-              closeModal={closeModal}
-              dispatch={dispatch}
-            />
 
             <FilterTasks taskList={taskList} />
           </div>
