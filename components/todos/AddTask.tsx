@@ -32,8 +32,18 @@ const AddTask: React.FC<AddTaskProps> = ({
     <Modal
       isOpen={modalIsOpen}
       onRequestClose={closeModal}
-      className="relative bg-white rounded-lg shadow dark:bg-gray-700 max-w-lg"
+      className="relative bg-white rounded-lg shadow dark:bg-gray-700 max-w-lg align-middle"
       contentLabel="Example Modal"
+      style={{
+        content: {
+          top: "50%",
+          left: "50%",
+          right: "auto",
+          bottom: "auto",
+          marginRight: "-50%",
+          transform: "translate(-50%, -50%)",
+        },
+      }}
     >
       {/* <!-- Modal header --> */}
       <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
