@@ -10,7 +10,7 @@ const DoneTasks: React.FC<DoneTasksProps> = ({ taskList }) => {
     <TodoContext.Provider value={false}>
       <div className="flex flex-col w-[352px] rounded-md bg-medium_black_200 p-6 px-4 space-y-4">
         <div className="flex flex-row justify-between items-center">
-          <span className="text-sm text-gray-500 font-bold">To do(4)</span>
+          <span className="text-sm text-gray-500 font-bold">Done(4)</span>
           <button className="flex flex-row justify-center items-center gap-2">
             <Image
               src="/assets/todos/plus.png"
